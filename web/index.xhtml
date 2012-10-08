@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>英単語テスト</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid rendered="#{sessionBean.loggedIn}" styleClass="subheaderlink">
+                <h:panelGrid rendered="#{sessionBean.testStatus.finished}" >
+                    <h:commandLink action="#{sessionBean.testStatus.reset}" value="はじめからやり直し"/>
+                </h:panelGrid>                
+                <h:panelGrid rendered="#{sessionBean.testStatus.running}" >                
+                    <h:outputLabel style="color: green" value="日本語の意味にあった英単語を入力してください。"/>                    
+                    <h:panelGrid  columns="1" >
+                        <h:outputLabel value="【問題】: #{sessionBean.testStatus.question}"/>
+                        <h:inputText value="#{sessionBean.testStatus.input}"/>
+                    </h:panelGrid>
+                    <h:panelGrid cellpadding="5" columns="2" style="height: 100%">
+                        <h:commandButton action="#{sessionBean.answerAction}" id="login1" value="回答"/>
+                    </h:panelGrid>
+                </h:panelGrid>                                
+            </h:panelGrid>
+            <h:panelGrid rendered="#{sessionBean.loggedOut}" style="width: 100%; height: 100%;" styleClass="subheaderlink">
+                <h:outputLabel style="color: green" value="ログインしてください。"/>                    
+                <h:panelGrid  columns="2" style="width: 100%; height: 100%;">
+                    <h:outputLabel value="ユーザー名:"/>
+                    <h:inputText value="#{sessionBean.username}" />
+                    <h:outputLabel value="パスワード:"/>
+                    <h:inputSecret value="#{sessionBean.password}" />
+                </h:panelGrid>
+                <h:panelGrid cellpadding="5" columns="2" style="height: 100%">
+                    <h:commandButton action="#{sessionBean.loginAction}" value="ログイン"/>
+                </h:panelGrid>
+            </h:panelGrid>        
+        </h:form>                          
+    </h:body>
+</html>
+

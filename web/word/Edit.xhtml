@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditWordTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditWordLabel_english}" for="english" />                    
+                    <h:inputText id="english" value="#{wordController.selected.english}" title="#{bundle.EditWordTitle_english}" />                    
+                    <h:outputLabel value="#{bundle.EditWordLabel_japanese}" for="japanese" />
+                    <h:inputText id="japanese" value="#{wordController.selected.japanese}" title="#{bundle.EditWordTitle_japanese}" />
+                </h:panelGrid>
+                <h:commandLink action="#{wordController.update}" value="#{bundle.EditWordSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditWordViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{wordController.prepareList}" value="#{bundle.EditWordShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditWordIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

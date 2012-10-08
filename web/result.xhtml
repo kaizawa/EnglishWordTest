@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <title>英単語テスト 回答ページ</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        <h:dataTable value="#{sessionBean.testStatus.questionList}" var="currentRow">
+            <h:column >
+                <h:panelGrid columns="1">
+                    <h:outputText  value="#{currentRow.word.english}" />
+                </h:panelGrid>
+                <f:facet name="header">
+                    <h:outputLabel value="英語"/>
+                </f:facet>
+            </h:column>
+            <h:column >
+                <h:panelGrid columns="1">
+                    <h:outputText  value="#{currentRow.word.japanese}" />
+                </h:panelGrid>
+                <f:facet name="header">
+                    <h:outputLabel value="日本語"/>
+                </f:facet>                
+            </h:column> 
+            <h:column >
+                <h:panelGrid columns="1">
+                    <h:panelGrid rendered="#{currentRow.correct}">
+                        <h:outputText value="正解" style="color: green" />
+                    </h:panelGrid>  
+                    <h:panelGrid rendered="#{currentRow.incorrect}">
+                        <h:outputText value="不正解" style="color: red" />
+                    </h:panelGrid>                     
+                </h:panelGrid>
+                <f:facet name="header">
+                    <h:outputLabel value="正誤"/>
+                </f:facet>                
+            </h:column>      
+            <h:column >
+                <h:panelGrid columns="1">
+                    <h:outputText  value="#{currentRow.accuracyRate}%"/>
+                </h:panelGrid>
+                <f:facet name="header">
+                    <h:outputLabel value="これまでの正解率"/>
+                </f:facet>                  
+            </h:column>             
+        </h:dataTable>
+        <h:form>
+            <h:commandLink style="vertical-align: right" action="#{sessionBean.testStatus.reset}" value="はじめからやり直し"/>
+        </h:form>
+    </h:body>
+</html>
+
